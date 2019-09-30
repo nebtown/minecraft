@@ -24,8 +24,9 @@ FROM openjdk:11-jre
 RUN apt update && apt dist-upgrade -y
 
 COPY --from=0 /minecraft /minecraft
+RUN echo eula=true > /minecraft/eula.txt
 
 WORKDIR /minecraft
-COPY ./include/* ./
+COPY ./start.sh /
 
-ENTRYPOINT ["/bin/bash", "/minecraft/start.sh"]
+ENTRYPOINT ["/bin/bash", "/start.sh"]
